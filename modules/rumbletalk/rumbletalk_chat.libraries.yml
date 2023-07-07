@@ -1,0 +1,6 @@
+rumbletalk_lib:
+    version: 1.1
+    header: true
+    css:
+        theme:
+            css/rumbletalk.css: {}

@@ -1,0 +1,28 @@
+<?php
+/**
+ * @file
+ * Installation file for miniOrange SAML Module.
+ */
+use Drupal\miniorange_saml_idp\feedback;
+use Drupal\miniorange_saml_idp\Utilities;
+/**
+ * hook_uninstall not needed.
+ * Configure variables are cleared when module is uninstalled.
+ **/
+ function miniorange_saml_idp_uninstall() {
+    $drupal_is_cli_command = Utilities::drupal_is_cli();
+    if(!$drupal_is_cli_command && \Drupal::config('miniorange_saml_idp.settings')->get('miniorange_saml_idp_feedback') == '1') {
+      feedback::miniorange_saml_idp_feedback();
+    }
+ }
+
+/**
+ * Implements hook_install().
+ */
+function miniorange_saml_idp_install() {
+
+
+  \Drupal::configFactory()->getEditable('miniorange_saml_idp.settings')->set('miniorange_saml_email_attribute', 'NameID')->save();
+  \Drupal::configFactory()->getEditable('miniorange_saml_idp.settings')->set('miniorange_saml_idp_feedback', '1')->save();
+  \Drupal::configFactory()->getEditable('miniorange_saml_idp.settings')->set('miniorange_saml_username_attribute', 'NameID')->save();
+}

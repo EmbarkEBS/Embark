@@ -1,0 +1,50 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\miniorange_saml_idp\Controller\miniorange_saml_idpController;
+/**
+ * @file
+ * Module file for miniOrange SAML Module.
+ */
+
+/**
+* Implements hook_menu().
+*/
+
+function miniorange_saml_idp_user_login($account){
+  if(isset($_COOKIE['response_params'])){
+    $response_params =  json_decode(stripslashes($_COOKIE['response_params']),true);
+    if(strcmp( $response_params['moIdpsendResponse'], 'true') == 0) {
+      miniorange_saml_idpController::mo_idp_send_reponse($response_params['acs_url'],$response_params['audience'],$response_params['relayState'],$response_params['inResponseTo']);
+    }
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function miniorange_saml_idp_help($route_name, RouteMatchInterface $route_match) {
+  switch ( $route_name ) {
+    case 'help.page.miniorange_saml_idp':
+      $url = Url::fromRoute('user.admin_index')->toString();
+      $moduleLink = $url .'/miniorange_saml_idp/idp_setup';
+      $supoortLink = $url .'/miniorange_saml_idp/support';
+
+      $output = '';
+      $output .= '<h3>' . t('About <a target="_blank" href="https://plugins.miniorange.com/drupal-saml-idp">[Know more]</a>') . '</h3>';
+      $output .= '<p>' . t('Drupal SAML IDP Single Sign On (SSO) - Identity Provider module allows users residing in your Drupal site to login to your SAML 2.0 Compliant Service Provider. This module allows your Drupal site to act as a SAML 2.0 Identity Provider which can be configured to establish the trust between the Drupal site and various SAML 2.0 supported Service Providers to securely authenticate the user using the Drupal credentials.') . '</p>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<p>' . t('Configure SAML Identity Provider from Configuration » <a target = "_blank" href=" ' . $url . ' ">People</a> » <a target = "_blank" href=" ' . $moduleLink . ' ">miniOrange SAML Identity Provider</a>:') . '</p>';
+      $output .= '<p>
+                           <ol>
+                              <li>' . t('Register with miniOrange. If you already have miniOrange account, enter your username and password to retrieve your account.') . '</li>
+                              <li>' . t('Once the account is retrieved, navigate to Identity Provider Setup tab to configure the SSO.') . '</li>
+                              <li>' . t('If you need any assistance,You can reach out via email at <a href="mailto:drupalsupport@xecurify.com">drupalsupport@xecurify.com</a> or <a href="mailto:info@xecurify.com">info@xecurify.com</a>') . '</li>
+                           </ol>
+                        </p>';
+      $output .= '<br><h3>' . t('Setup Guides') . '</h3>';
+      $output .= '<p> Click <a target="_blank" href="https://plugins.miniorange.com/guide-enable-miniorange-drupal-saml-idp" >here</a> to check out step-by-step setup documents and video guides </p><br>';
+      return $output;
+  }
+}

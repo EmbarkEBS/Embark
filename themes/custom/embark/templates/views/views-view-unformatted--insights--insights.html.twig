@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set row_classes = [
+    default_row_class ? 'views-row',
+  ]
+%}
+<section class="insights-listing" style="margin-top:20%;">
+    <div class="emb-container">
+        <div class="emb-row emb-wrap">
+            {% for key,row in rows %}
+                <div class="emb-col-sm-12 emb-col-lg-4">
+                        <div class="insight-image-s">
+                        {{ view.style_plugin.getField(key, 'field_insights_image') }}
+                        <h4>{{ view.style_plugin.getField(key, 'field_subtitle') }}</h4>
+                    </div>
+                    <div class="team-description-1">
+                        <h3 class="heading-1">{{ view.style_plugin.getField(key, 'title') }}</h3>
+                    </div>
+                    <div class="insight-content">
+                        <div class="date-tags">
+                            <div class="date">{{ view.style_plugin.getField(key, 'uid') }}</div>
+                            <div class="vertical-lines">{{ view.style_plugin.getField(key, 'created') }}</div>
+                        </div>
+                      <p class="description">{{ view.style_plugin.getField(key, 'body') }}</p>
+                        <a target="_blank" href="{{ view.style_plugin.getField(key, 'url') |striptags|trim }}">Read more</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

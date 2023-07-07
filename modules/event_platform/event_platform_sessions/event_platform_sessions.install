@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Event Platform Sessions module.
+ */
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_install().
+ */
+function event_platform_sessions_install() {
+  // Update registration_role config.
+  $config = \Drupal::configFactory()->getEditable('registration_role.setting');
+  $config->set('role_to_select', ['speaker' => 'speaker'])->save();
+
+  // Update registration_role config.
+  $config = \Drupal::configFactory()->getEditable('user.settings');
+  $config->set('register', 'visitors')->save();
+
+  // Nested array to hold default term data.
+  $terms['session_audience'] = [
+    'All Attendees',
+    'Beginner',
+    'Intermediate',
+    'Advanced',
+  ];
+
+  $terms['session_category'] = [
+    'New to Drupal',
+    'Development & Performance',
+    'Project Management & Consulting',
+    'Off the "Drupal Island"',
+    'Site-Building',
+    'Theming, Design, & Usability',
+  ];
+
+  $terms['room'] = [
+    'Room A',
+    'Room B',
+    'Room C',
+  ];
+
+  foreach ($terms as $vocab => $vocab_terms) {
+    $index = 0;
+    foreach ($vocab_terms as $label) {
+      // Create the taxonomy term.
+      $new_term = Term::create([
+        'name' => $label,
+        'vid' => $vocab,
+      ]);
+      $new_term->setWeight($index);
+
+      // Save the taxonomy term.
+      $new_term->save();
+      $index++;
+    }
+  }
+}

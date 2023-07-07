@@ -1,0 +1,30 @@
+<?php
+/**
+ * Implements hook_theme().
+ */
+function paragraphs_bootstrap_carousel_theme($existing, $type, $theme, $path) {
+  $variables = [
+    'paragraphs_bootstrap_carousel' => [
+      'variables' => [
+        'id_field_name' => 'paragraphs-boostrap-carousel',
+        'items' => NULL,
+        'settings' => NULL,
+      ],
+      'template' => 'paragraphs-boostrap-carousel',
+    ],
+  ];
+
+  return $variables;
+}
+
+/**
+ * Implements hook_help().
+ */
+function paragraphs_bootstrap_carousel_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.paragraphs_bootstrap_carousel':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Paragraph Bootstrap Carousel module provides a easy way to create bootstrap carousels with paragraphs.') . '</p>';
+      return $output;
+  }
+}

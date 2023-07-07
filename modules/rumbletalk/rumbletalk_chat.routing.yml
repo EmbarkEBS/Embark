@@ -1,0 +1,15 @@
+rumbletalk_chat.chat_form:
+  path: '/rumbletalkChat'
+  defaults:
+    _form: '\Drupal\rumbletalk_chat\Form\ChatForm'
+    _title: 'RumbleTalk Group Chat'
+  requirements:
+    _permission: 'access content'
+
+rumbletalk_chat.display_chat:
+  path: '/rumbletalkChat/display'
+  defaults:
+    _form: '\Drupal\rumbletalk_chat\Form\DisplayChatForm'
+    _title: 'RumbleTalk Group Chat Block'
+  requirements:
+    _permission: 'access content'

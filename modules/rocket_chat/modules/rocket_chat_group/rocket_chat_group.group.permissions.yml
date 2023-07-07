@@ -1,0 +1,4 @@
+#use rocketchat direct links:
+#  title: 'Use Direct links to the Rocket chat'
+#  description: 'permission used to validate whether you can use a link to the chat environment outside of Drupal.'
+#  restrict access: TRUE

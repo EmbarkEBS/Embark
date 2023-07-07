@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: bootstrap_carousel
+label: 'Bootstrap Carousel'
+icon_uuid: null
+icon_default: null
+description: 'Exemple Bootstrap Carousel'
+behavior_plugins: {  }

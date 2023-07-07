@@ -1,0 +1,12 @@
+name: Rocket Chat API
+type: module
+description: API module for Rocketchat.
+package: Rocket.Chat
+core_version_requirement: ^9.4 || ^10
+dependencies:
+php: 7.4
+
+# Information added by Drupal.org packaging script on 2022-08-04
+version: '3.0.1'
+project: 'rocket_chat'
+datestamp: 1659621183

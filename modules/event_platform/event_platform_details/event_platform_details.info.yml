@@ -1,0 +1,15 @@
+name: Event Platform Event Details
+type: module
+description: Provides a config page to set event information
+package: Event Platform
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - drupal:datetime_range
+  - config_pages:config_pages
+  - field_group:field_group
+  - field_permissions:field_permissions
+
+# Information added by Drupal.org packaging script on 2023-01-29
+version: '1.0.0-beta3'
+project: 'event_platform'
+datestamp: 1675001178

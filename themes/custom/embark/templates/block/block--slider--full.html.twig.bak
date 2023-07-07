@@ -1,0 +1,101 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{# {{ attach_library('embark/slick-slider') }} #}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+  ]
+%}		
+<!-- slider Start -->
+<section id="home-slider">
+    <div class="w-container-fluid">
+        <div class="w-row">
+            <div class="w-col-12">
+                <div{{ attributes.addClass(classes) }}>
+                    {{ title_prefix }}
+                    {{ title_suffix }}
+                    {% block content %}
+                    <div class="slider-wrapper">
+                        {% if content.field_slider %}
+                            {% for key, item in content.field_slider['#items'] %}
+                                <div class="slider-item">
+                                    <div class="slider-img">
+                                        <picture>
+                                            <source srcset="{{ content.field_paragraph_media[key]['#media'].field_media_image.entity.uri.value| image_style('wbanner') }} 1x"  media="(min-width:768px)" type="image/webp">
+                                            <source srcset="{{ content.field_paragraph_media[key]['#media'].field_media_image.entity.uri.value| image_style('banner') }} 1x" media="(min-width:768px)" type="image/jpeg">
+                                            <source srcset="{{ content.field_paragraph_mobile_media[key]['#media'].field_media_image.entity.uri.value| image_style('grid') }}" media="(max-width:767px)" type="image/jpeg">
+                                            <img src="{{ content.field_paragraph_media[key]['#media'].field_media_image.entity.uri.value| image_style('banner') }}" alt="Home-page-banner">
+                                        </picture>
+                                        {# <img src="{{ content.field_paragraph_media[key]['#media'].field_media_image.entity.uri.value| image_style('wbanner') }}" alt="home-banner"> #}
+                                    </div>
+                                    <div class="  emb-container">
+                                        <div class="emb-row align-center">
+                                            <div class="emb-col-lg-5">
+                                                <div class="slider-caption">
+                                                    <div class="hint-text">
+                                                    <span class="yellow-square"></span>
+                                                    {% if item.entity.field_subtitle %}
+                                                        {{ item.entity.field_subtitle.0.value }}
+                                                    {% endif %}
+                                                    </div>
+                                                    <h1 class="banner heading">
+                                                        {% if item.entity.field_title %}
+                                                             {{ item.entity.field_title.0.value }}
+                                                         {% endif %}
+                                                    </h1>
+                                                    <p class="banner description">
+                                                        {% if item.entity.field_description %}
+                                                            {{ item.entity.field_description.0.value|raw }}
+                                                        {% endif %}
+                                                    </p>
+                                                    <div class="slider-content-button">
+                                                        {% if item.entity.field_link %}
+                                                            {% if content.url[key].isExternal() %}
+                                                                <a href="{{ content.url[key] }}" class="primary-btn btn right-arrow" target="_blank">{{ content.title[key]|raw }}</a>
+                                                            {% else %}
+                                                                <a href="{{ content.url[key] }}" class="primary-btn btn right-arrow">{{ content.title[key]|raw }}</a>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Slider End -->

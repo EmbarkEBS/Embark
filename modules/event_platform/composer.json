@@ -1,0 +1,27 @@
+{
+    "name": "drupal/event_platform",
+    "type": "drupal-module",
+    "description": "Preconfigured features to enabling creating an event website",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/event_platform",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/event_platform",
+        "source": "https://git.drupalcode.org/project/event_platform"
+    },
+    "require": {
+        "drupal/add_content_by_bundle": "^1.2",
+        "drupal/auto_entitylabel": "^3.0@beta",
+        "drupal/config_pages": "^2.9",
+        "drupal/field_group": "^3.2",
+        "drupal/field_permissions": "^1.1",
+        "drupal/hide_revision_field": "^2.2",
+        "drupal/honeypot": "^2.0",
+        "drupal/pathauto": "^1.9",
+        "drupal/registration_role": "^1.1",
+        "drupal/smart_date": "^3.7@beta",
+        "drupal/views_summary_tabs": "^1.0@beta",
+        "drupal/workbench_email": "^2.2"
+    }
+}

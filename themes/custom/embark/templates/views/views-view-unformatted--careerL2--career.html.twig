@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set row_classes = [
+    default_row_class ? 'views-row',
+  ]
+%}
+<!--<section class="insights-listing">-->
+    <div class="emb-container-fluid">
+        <div class="emb-row emb-wrap" id="careers-card">
+                <div class="emb-col-md-6 p-0">
+                    <div class="careers-box">
+                    {{ view.style_plugin.getField(key, 'field_job_category') }}
+                    {{ view.style_plugin.getField(key, 'field_job_location') }}
+                    {{ view.style_plugin.getField(key, 'field_job_type') }}
+                    </div>
+                    <div class="careers-content"
+                            <p class="client-description">{{ view.style_plugin.getField(key, 'body') }}</p>
+                            <!--<a  href="{{ view.style_plugin.getField(key, 'view_node_1')|striptags|trim }}" class="client-link btn primary-btn">Read more</a>-->
+                    </div>
+                </div>
+                <div class="emb-col-md-6 p-0">
+
+                        <div class="contact">
+                           <!-- <h3 class="heading1">Contact us</h3>-->
+
+                            {{ drupal_entity('webform', 'Apply for this position') }}
+                        </div>
+                    </div>
+        </div>
+    </div>
+<!--</section>-->

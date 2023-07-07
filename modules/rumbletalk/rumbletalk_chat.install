@@ -1,0 +1,79 @@
+<?php
+
+function rumbletalk_chat_install() {
+	$values = [
+		[
+			'hashcode' => '',
+			'height' => 0,
+			'width' => 0,
+			'members' => 0,
+			'forceLogin' => 0,
+			'user' => '',
+		],
+	];
+	
+	$database = \Drupal::database();
+	$query = $database->insert('chat_details')->fields(['hashcode', 'height', 'width', 'members', 'forceLogin', 'user']);
+	foreach ($values as $details) {
+		$query->values($details);
+	}
+	$query->execute();
+}
+
+function rumbletalk_chat_schema() {
+    $schema['chat_details'] = array(
+		'description' => 'Stores value of the chat details',
+		'fields' => array(
+			'cid' => array(
+				'type' => 'serial',
+				'not null' => TRUE,
+				'description' => 'Primary Key: Unique id for chat',
+			),
+			'hashcode' => array(
+				'type' => 'varchar',
+				'length' => 255,
+				'not null' => FALSE,
+				'default' => '',
+				'description' => 'Hashcode of the chat',
+			),
+			'height' => array(
+				'type' => 'int',
+				'length' => 255,
+				'not null' => FALSE,
+				'default' => '500',
+				'description' => 'Height of the chat',
+			),
+			'width' => array(
+				'type' => 'int',
+				'length' => 255,
+				'not null' => FALSE,
+				'default' => '750',
+				'description' => 'Width of the chat',
+			),
+			'members' => array(
+				'type' => 'int',
+				'length' => 255,
+				'not null' => TRUE,
+				'default' => '0',
+				'description' => 'Login type of the chat',
+			),
+			'forceLogin' => array(
+				'type' => 'int',
+				'length' => 255,
+				'not null' => TRUE,
+				'default' => '0',
+				'description' => 'Determines chat the chat with force login option',
+			),
+			'user' => array(
+				'type' => 'varchar',
+				'length' => 255,
+				'not null' => FALSE,
+				'default' => '',
+				'description' => 'User in Drupal who accessed',
+			),
+    	),
+    	'primary key' => array('cid'),
+    );
+
+    return $schema;
+}

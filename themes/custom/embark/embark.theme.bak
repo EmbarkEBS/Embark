@@ -1,0 +1,168 @@
+<?php
+
+/**
+ * @file
+ * Workiy theme file.
+ *
+ * Place your custom PHP code in this file.
+ */
+use Drupal\Component\Serialization\Json;
+use Drupal\block_content\BlockContentInterface;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Datetime\DrupalDateTime;
+
+/**
+ * Implements hook_preprocess_block().
+ *
+ * Attached libraries for specific blocks.
+ */
+ function embark_preprocess_block(&$variables) {
+      // Slider Banner.
+  $content = $variables['elements']['content'];
+  if (isset($content['#block_content']) && $content['#block_content'] instanceof BlockContentInterface) {
+    $blockType = $content['#block_content']->bundle();
+    if ($blockType === 'slider') {
+      $media = [];
+      $paragraph = $content['#block_content']->get('field_slider')->referencedEntities();
+      if ($paragraph) {
+        foreach ($paragraph as $paragraphs) {
+          $paragraph_media = $paragraphs->get('field_slide_image');
+          $paragraph_mobile_media = $paragraphs->get('field_mobile_image');
+          $link = !empty($paragraphs->get('field_link')->getValue()) ? $paragraphs->get('field_link')->getValue()[0] : NULL;
+          $variables['content']['url'][] = isset($link['uri']) ? Url::fromUri($link['uri']) : NULL;
+          $variables['content']['title'][] = isset($link['title']) ? $link['title'] : NULL;
+          if ($paragraph_media[0] && $paragraph_media[0]->entity) {
+            $build = \Drupal::entityTypeManager()->getViewBuilder('media')->view($paragraph_media[0]->entity);
+            $variables['content']['field_paragraph_media'][] = $build;
+          }
+          if ($paragraph_mobile_media[0] && $paragraph_mobile_media[0]->entity) {
+            $build = \Drupal::entityTypeManager()->getViewBuilder('media')->view($paragraph_mobile_media[0]->entity);
+            $variables['content']['field_paragraph_mobile_media'][] = $build;
+          }
+        }
+      }
+    }
+    if ($blockType === 'card') {
+      $media = [];
+      $paragraph = $content['#block_content']->get('field_card')->referencedEntities();
+      if ($paragraph) {
+        foreach ($paragraph as $paragraphs) {
+          $paragraph_media = $paragraphs->get('field_grid_image');
+          if ($paragraph_media[0] && $paragraph_media[0]->entity) {
+            $build = \Drupal::entityTypeManager()->getViewBuilder('media')->view($paragraph_media[0]->entity);
+            $variables['content']['field_paragraph_media'][] = $build;
+          }
+        }
+      }
+    }
+  }
+}
+/**
+ * Implements hook_theme_suggestions_block_alter().
+ */
+function embark_theme_suggestions_block_alter(&$suggestions, $variables) {
+    $content = $variables['elements']['content'];
+    if (isset($variables['elements']['content']['#block_content'])  && $content['#block_content'] instanceof BlockContentInterface) {
+      $block_type = [
+        'slider',
+        'grid',
+        'banner',
+        'contact_us',
+        'card'
+      ];
+    //   kint($variables['elements']['content']['#block_content']->bundle());
+      $bundle    = $variables['elements']['content']['#block_content']->bundle();
+      $view_mode     = strtr($variables['elements']['#configuration']['view_mode'], '.', '_');
+    //   kint($view_mode);
+      if (in_array($bundle, $block_type)) {
+        $view_mode     = strtr($variables['elements']['#configuration']['view_mode'], '.', '_');
+        $suggestions[] = 'block__' . $bundle . '__' . $view_mode;
+      }
+    }
+}
+/**
+ * Implements hook_theme_suggestions_views_view_unformatted_alter().
+ */
+function embark_theme_suggestions_views_view_unformatted_alter(&$suggestions, $variables) {
+  
+ 
+  if ($variables['view']->id() == "partner" && $variables['view']->current_display == "home_partner") {
+    $suggestions[] = 'views_view_unformatted__' . $variables['view']->id() . '__homepartner';
+  }
+
+ if ($variables['view']->id() == "clients" && $variables['view']->current_display == "home_clients") {
+    $suggestions[] = 'views_view_unformatted__' . $variables['view']->id() . '__homeclients';
+  }
+   if ($variables['view']->id() == "sub_services " && $variables['view']->current_display == "subservice") {
+    $suggestions[] = 'views_view_unformatted__' . $variables['view']->id() . '__sub_services ';
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function embark_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  if ($paragraph->bundle() == 'social_media') {
+    if (!empty($paragraph->get('field_title')->getValue()[0]['value'])) {
+      $variables['title'] = $paragraph->get('field_title')->getValue()[0]['value'];
+    }
+    $link = $paragraph->get('field_link')->getValue();
+    $variables['link_url'] = $link ? Url::fromUri($link[0]['uri']) : '';
+    $variables['link_text'] = $link ? $link[0]['title'] : '';
+  }
+  if ($paragraph->bundle() == 'full_width_description') {
+    if (!empty($paragraph->get('field_title')->getValue()[0]['value'])) {
+      $variables['title'] = $paragraph->get('field_title')->getValue()[0]['value'];
+    }
+    if (!empty($paragraph->get('field_description_para')->getValue()[0]['value'])) {
+      $variables['desc'] = $paragraph->get('field_description_para')->getValue()[0]['value'];
+    }
+  }
+  if ($paragraph->bundle() == 'half_width') {
+    if (!empty($paragraph->get('field_title')->getValue()[0]['value'])) {
+      $variables['title'] = $paragraph->get('field_title')->getValue()[0]['value'];
+    }
+    if (!empty($paragraph->get('field_description_para')->getValue()[0]['value'])) {
+      $variables['desc'] = $paragraph->get('field_description_para')->getValue()[0]['value'];
+    }
+  }
+  if ($paragraph->bundle() == 'image_block') {
+    if (!empty($paragraph->get('field_title')->getValue()[0]['value'])) {
+      $variables['title'] = $paragraph->get('field_title')->getValue()[0]['value'];
+    }
+    $paragraph_media = $paragraph->get('field_image');
+    if ($paragraph_media[0] && $paragraph_media[0]->entity) {
+      $build = \Drupal::entityTypeManager()->getViewBuilder('media')->view($paragraph_media[0]->entity);
+      $variables['paragraph_media'] = $build;
+    }
+  }
+  if ($paragraph->bundle() == 'full_width_image') {
+    if (!empty($paragraph->get('field_title')->getValue()[0]['value'])) {
+      $variables['title'] = $paragraph->get('field_title')->getValue()[0]['value'];
+    }
+    $paragraph_media = $paragraph->get('field_fullimage');
+    if ($paragraph_media[0] && $paragraph_media[0]->entity) {
+      $build = \Drupal::entityTypeManager()->getViewBuilder('media')->view($paragraph_media[0]->entity);
+      $variables['paragraph_media'] = $build;
+    }
+  }
+  if ($paragraph->bundle() == 'primary_key_parameter') {
+    if (!empty($paragraph->get('field_title')->getValue()[0]['value'])) {
+      $variables['title'] = $paragraph->get('field_title')->getValue()[0]['value'];
+    }
+    if (!empty($paragraph->get('field_description_para')->getValue()[0]['value'])) {
+      $variables['desc'] = $paragraph->get('field_description_para')->getValue()[0]['value'];
+    }
+    if (!empty($paragraph->get('field_parameter')->getValue()[0]['value'])) {
+      $variables['parameter'] = $paragraph->get('field_parameter')->getValue()[0]['value'];
+    }
+    if (!empty($paragraph->get('field_parameter_')->getValue()[0]['value'])) {
+      $variables['parameter_bottom_text'] = $paragraph->get('field_parameter_')->getValue()[0]['value'];
+    }
+  }
+}

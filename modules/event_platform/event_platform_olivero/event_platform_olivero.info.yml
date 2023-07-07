@@ -1,0 +1,16 @@
+name: Event Platform Olivero
+type: module
+description: Automatically places blocks in the Olivero theme
+package: Event Platform
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - event_platform:event_platform_sessions
+  - event_platform:event_platform_sponsors
+  - event_platform:event_platform_job_listings
+  - event_platform:event_platform_speakers
+  - event_platform:event_platform_details
+
+# Information added by Drupal.org packaging script on 2023-01-29
+version: '1.0.0-beta3'
+project: 'event_platform'
+datestamp: 1675001178

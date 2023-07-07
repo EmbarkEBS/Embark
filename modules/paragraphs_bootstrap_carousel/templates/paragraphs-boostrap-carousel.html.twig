@@ -1,0 +1,75 @@
+{%
+  set classes = [
+  'pargraphs-bootstrap-carousel',
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes.addClass('visually-hidden') }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    <div
+      id="{{ id_field_name }}"
+      class="carousel slide {{ settings['custom_class'] }}"
+      data-bs-ride="carousel"
+      data-bs-wrap="{% if settings['wrap'] == 1  %}true{% else %}false{% endif %}"
+      data-bs-pause="{% if settings['pause']  %}hover{% endif %}"
+      data-ride="carousel"
+      data-wrap="{% if settings['wrap'] == 1  %}true{% else %}false{% endif %}"
+      data-pause="{% if settings['pause']  %}hover{% endif %}"
+    >
+      <!-- Indicators -->
+      {% if settings['indicators']  %}
+        <div class="carousel-indicators">
+          {% for item in items %}
+            <button type="button"
+              data-target="#{{ id_field_name }}" data-slide-to="{{ loop.index - 1 }}"
+              data-bs-target="#{{ id_field_name }}" data-bs-slide-to="{{ loop.index - 1 }}"
+              class="indicator-item{{ loop.first ? ' active' : '' }}"
+              {{ (loop.index - 1) ? '' : 'class="active" aria-current="true"' }}
+            ></button>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        {% for item in items %}
+          <div class="carousel-item {{ loop.first ? ' active' : '' }}"
+               data-bs-interval="{{ settings['interval'] }}">
+            {% if item.image_link is not empty %}
+            <a href="{{ item.image_link }}">
+              {% endif %}
+              <img
+                src="{{ item.image_url }}"
+                class="d-block w-100 carousel-image {{ settings.get('image_type') }}"
+                alt="{{ item.image_alt }}"
+                title="{{ item.image_title }}"
+              >
+              {% if item.image_link is not empty %}
+            </a>
+            {% endif %}
+            <div class="carousel-caption d-none d-md-block">
+              {% if item.caption_title  %}<h3> {{ item.caption_title }} </h3>{% endif %}
+              {% if item.caption_text  %}<p> {{ item.caption_text | raw }} </p>{% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Controls -->
+      {% if settings['controls']  %}
+        <button class="carousel-control-prev" type="button" data-bs-target="#{{ id_field_name }}" data-bs-slide="prev" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#{{ id_field_name }}" data-bs-slide="next" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      {% endif %}
+    </div>
+  {% endblock %}
+</div>

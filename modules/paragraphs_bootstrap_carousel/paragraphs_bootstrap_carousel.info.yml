@@ -1,0 +1,13 @@
+name: 'Paragraphs Bootstrap Carousel'
+type: module
+description: 'This module displays carousel by field formatter for the Paragraphs entity type'
+core_version_requirement: ^9.3 || ^10
+package: 'Fields'
+dependencies:
+  - paragraphs:paragraphs
+  - drupal:link
+
+# Information added by Drupal.org packaging script on 2023-01-03
+version: '2.0.2'
+project: 'paragraphs_bootstrap_carousel'
+datestamp: 1672705941

@@ -1,0 +1,24 @@
+name: Event Platform Sessions
+type: module
+description: A content type, views, and vocabularies for managing sessions
+package: Event Platform
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - drupal:content_moderation
+  - drupal:datetime_range
+  - drupal:workflows
+  - add_content_by_bundle:add_content_by_bundle
+  - auto_entitylabel:auto_entitylabel
+  - field_group:field_group
+  - field_permissions:field_permissions
+  - hide_revision_field:hide_revision_field
+  - honeypot:honeypot
+  - registration_role:registration_role
+  - smart_date:smart_date
+  - views_summary_tabs:views_summary_tabs
+  - workbench_email:workbench_email
+
+# Information added by Drupal.org packaging script on 2023-01-29
+version: '1.0.0-beta3'
+project: 'event_platform'
+datestamp: 1675001178

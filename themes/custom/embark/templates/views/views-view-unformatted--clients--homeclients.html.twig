@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set row_classes = [
+    default_row_class ? 'views-row',
+  ]
+%}
+<section id="our-clients">
+    <div class="emb-container">
+        <div class="hint-text"><h2 style="padding-top:60px">Our Clients<h2></div>
+        <h5 class="heading"><span class="light">Growth Rocket is the agency of choice for a diverse roster of clients. We have driven results for<br>emerging brands in South East Asia to big businesses in the US, Australia, and the UK. They<br>continue to trust us to deploy end-to-end strategies tailored to their unique needs and goals.</h5>
+        <div class="emb-row emb-wrap client-items">
+            {% for key,row in rows %}
+            <div class="emb-col-md-6 emb-col-sm-12 emb-col-lg-3">
+                <div class="client-item">
+                    <div class="client-logo">{{ view.style_plugin.getField(key, 'field_client_image') }}</div>
+                    <div class="client-content">
+                        <h4 class="client-name">{{ view.style_plugin.getField(key, 'title') }}</h4>
+                        {{ view.style_plugin.getField(key, 'body') }}
+                        <!-- <a target="_blank" href="{{ view.style_plugin.getField(key, 'field_website_link') |striptags|trim }}">Read more</a>-->
+
+                    </div>
+                </div>
+			    </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

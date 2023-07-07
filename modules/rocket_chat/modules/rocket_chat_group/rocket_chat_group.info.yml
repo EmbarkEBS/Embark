@@ -1,0 +1,17 @@
+name: Rocket Chat Group integration
+type: module
+description: Group module for Rocketchat.
+package: Rocket.Chat
+core_version_requirement: ^9.4 || ^10
+dependencies:
+  - rocket_chat:rocket_chat
+  - rocket_chat:rocket_chat_api
+  - group:group
+  - drupal:block
+  - drupal:field
+php: 7.4
+
+# Information added by Drupal.org packaging script on 2022-08-04
+version: '3.0.1'
+project: 'rocket_chat'
+datestamp: 1659621183

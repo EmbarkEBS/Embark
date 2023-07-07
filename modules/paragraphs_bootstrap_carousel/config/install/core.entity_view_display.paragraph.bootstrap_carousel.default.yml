@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.bootstrap_carousel.field_caption
+    - field.field.paragraph.bootstrap_carousel.field_image
+    - field.field.paragraph.bootstrap_carousel.field_link
+    - paragraphs.paragraphs_type.bootstrap_carousel
+  module:
+    - image
+    - link
+    - text
+id: paragraph.bootstrap_carousel.default
+targetEntityType: paragraph
+bundle: bootstrap_carousel
+mode: default
+content:
+  field_caption:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_link:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden:
+  search_api_excerpt: true

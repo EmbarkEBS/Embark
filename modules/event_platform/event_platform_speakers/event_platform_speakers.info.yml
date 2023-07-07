@@ -1,0 +1,13 @@
+name: Event Platform Featured Speakers
+type: module
+description: Provides a content type and view to display featured speakers
+package: Event Platform
+core_version_requirement: ^8 || ^9 || ^10
+requirements:
+  - add_content_by_bundle:add_content_by_bundle
+  - field_permissions:field_permissions
+
+# Information added by Drupal.org packaging script on 2023-01-29
+version: '1.0.0-beta3'
+project: 'event_platform'
+datestamp: 1675001178

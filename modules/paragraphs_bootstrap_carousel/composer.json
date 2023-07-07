@@ -1,0 +1,24 @@
+{
+  "name": "drupal/paragraphs_bootstrap_carousel",
+  "description": "This module provides a easy way to create bootstrap carousels with paragraphs",
+  "type": "drupal-module",
+  "minimum-stability": "stable",
+  "homepage": "https://www.drupal.org/project/paragraphs_bootstrap_carousel",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/paragraphs_bootstrap_carousel",
+    "source": "https://git.drupalcode.org/project/paragraphs_bootstrap_carousel"
+  },
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "NGUYEN Bao",
+      "email": "n.bao@yahoo.com",
+      "homepage": "https://www.drupal.org/u/lazzyvn",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "drupal/core": "^9.3 || ^10",
+    "drupal/paragraphs": "~1.0"
+  }
+}

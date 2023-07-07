@@ -1,0 +1,5 @@
+rumbletalk_chat.configuration:
+  title: 'RumbleTalk Group Chat'
+  parent: system.admin_config_services
+  description: 'Set your own RumbleTalk Group Chat'
+  route_name: rumbletalk_chat.chat_form

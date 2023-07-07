@@ -1,0 +1,21 @@
+name: embark
+type: theme
+description: 'Custom Theme for embark Website.'
+package: Other
+core_version_requirement: ^9 || ^10
+
+libraries:
+  - embark/global-styling
+  - embark/slick-slider
+
+base theme: stable9
+
+regions:
+  branding: Branding
+  navigation: Main navigation
+  search: Search
+  featured: Featured
+  content: Content
+  footer_first: Footer First
+  footer_second: Footer Second
+  footer_bottom: Footer Bottom

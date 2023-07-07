@@ -1,0 +1,16 @@
+name: Event Platform Job Listings
+type: module
+description: Provides a content type and view for managing job listings
+package: Event Platform
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - add_content_by_bundle:add_content_by_bundle
+  - event_platform:event_platform_sponsors
+  - field_permissions:field_permissions
+  - hide_revision_field:hide_revision_field
+  - pathauto:pathauto
+
+# Information added by Drupal.org packaging script on 2023-01-29
+version: '1.0.0-beta3'
+project: 'event_platform'
+datestamp: 1675001178

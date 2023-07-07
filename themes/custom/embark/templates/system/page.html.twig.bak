@@ -1,0 +1,91 @@
+<header aria-label="Site header" class="header" id="header" role="banner">
+<div class="menu-overlay"></div>
+  <div class="wky-container">
+  <div class="emb-col-12 emb-col-sm-12 emb-col-lg-12">
+  <div class="social-links d-none d-md-flex align-items-center" style="padding-top:8px;">
+		<a style="margin-left:140px"> <span>India <b>(+91)452-4212111</b></span></a>
+		<a> <span>North America <b>(602)399 7883</b></span></a>
+  </div>
+  </div>
+  <hr>
+    <div class="emb-row align-center">
+      <div class="emb-col-3 emb-col-sm-3 emb-col-lg-3">
+        <div class="main-logo">{{ page.branding }}</div>
+      </div>
+      <div class="emb-col-9 emb-col-sm-9 emb-col-lg-9">
+        <div class="header-right">
+          <div class="Ecommerce">
+            <a href="/embark/ecommerce">Ecommerce</a>
+          </div>
+          <div class="digital-marketing">
+            <a href="/embark/digital-marketing">Digital Marketing</a>
+          </div>
+          <div class="technology">
+            <a href="/embark/technology">Technology</a>
+          </div>
+          <div class="start-up">
+            <a href="#">Start Up</a>
+          </div>
+          <div class="growing-business">
+            <a href="#">Growing Business</a>
+          </div>
+          <div class="careers">
+            <a href="#">Careers</a>
+          </div>
+          <div class="blog">
+            <a href="/embark/blogs">Blog</a>
+          </div>
+          <div class="contact">
+            <a href="/embark/contact">Contact</a>
+          </div>
+          <!--<div class="search">
+            <div class="search-icon"></div>
+            <div class="search-close"></div>
+            <div class="search-content">{{ page.search }}</div>
+          </div>
+          <div class="main-navigation">
+            <div class="humburger-menu"></div>
+            <div class="menu-close"></div>
+            {{ page.navigation }}
+          </div>-->
+          <span class="ribbon1"><a href="tel:(+91)452-4212111"><span><b>CALL</b> <br>To Us</span></a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="featured" id="featured" role="complementary">
+   {{ page.featured }}
+</section>
+<section class="main" id="main">
+   <main aria-label="Site main content" class="content" id="content" role="main">
+     {{ page.content }}
+   </main>
+</section>
+<footer aria-label="Site footer" class="footer" id="footer" role="contentinfo">
+  <div class="footer--top">
+    <div class="emb-container">
+      <div class="emb-row">
+        <div class="emb-col-md-4 emb-col-lg-4 footer-left">
+          <div class="footer-left-inner">
+             {{ page.footer_first }}
+          </div>
+        </div>
+        <div class="emb-col-md-8 emb-col-lg-8 footer-right">
+          <div class="footer-right-inner">
+             {{ page.footer_second }}
+          </div>
+        </div>
+        <!-- {{ page.footer_third }} -->
+      </div>
+    </div>
+  <div class="footer--bottom">
+    <div class="emb-container">
+      <div class="emb-row align-center">
+        <div class="emb-col-lg-12">
+          {{ page.footer_bottom }}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

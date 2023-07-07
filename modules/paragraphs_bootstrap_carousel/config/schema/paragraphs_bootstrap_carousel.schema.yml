@@ -1,0 +1,46 @@
+field.formatter.settings.paragraphs_bootstrap_carousel_formatter:
+  type: mapping
+  label: 'Paragraphs bootstrap carousel formatter settings.'
+  mapping:
+    view_mode:
+      type: string
+      label: 'View Mode'
+    interval:
+      type: integer
+      label: 'Interval'
+    pause:
+      type: boolean
+      label: 'Pause on mouse hover'
+    indicators:
+      type: boolean
+      label: 'Show indicators'
+    caption:
+      type: string
+      label: 'Field caption'
+    image:
+      type: string
+      label: 'Field Image'
+    link:
+      type: string
+      label: 'Field link on click'
+    image_type:
+      type: string
+      label: 'Image type'
+    image_style:
+      type: string
+      label: 'Image style'
+    custom_class:
+      type: string
+      label: 'Custom class'
+    wrap:
+      type: boolean
+      label: 'Loop'
+    ajax:
+      type: boolean
+      label: 'Use Ajax'
+    cdn:
+      type: string
+      label: 'Use Boostrap CDN'
+    controls:
+      type: boolean
+      label: 'Show controls'

@@ -1,0 +1,11 @@
+name: RumbleTalk Group Chat
+description: The RumbleTalk Group chat is a module which allows you to embed a chat in your Drupal page.
+package: RumbleTalk
+
+type: module
+core_version_requirement: ^9.2 || ^10
+
+# Information added by Drupal.org packaging script on 2022-10-19
+version: '1.0.3'
+project: 'rumbletalk'
+datestamp: 1666172956
